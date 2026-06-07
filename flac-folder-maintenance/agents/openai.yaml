@@ -1,0 +1,4 @@
+interface:
+  display_name: "FLAC Folder Maintenance"
+  short_description: "Clean, tag, rename, and verify FLAC releases"
+  default_prompt: "Use $flac-folder-maintenance to clean, tag, rename, add artwork, and verify this FLAC release folder."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Classical FLAC Maintenance"
+  short_description: "Organize, tag, and verify classical FLAC works"
+  default_prompt: "Use $classical-flac-folder-maintenance to organize, tag, rename, add artwork, and verify this classical FLAC work folder."
