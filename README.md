@@ -1,15 +1,42 @@
-These two skill i made for codex, the AI from OpenAI. On my windows machine i put them in C:\Users\[user]\.codex\skills. It depens on a few external tools:
+These two skill i made for codex, the AI from OpenAI. On my windows machine i put them in C:\Users\[user]\.codex\skills. 
 
-  - Python 3.12
-  - mutagen for FLAC/Vorbis comment and picture editing
-  - metaflac for metadata inspection, picture import/export, and ReplayGain
-  - flac / flac.exe for integrity testing with -t
-  - sox if files need to be recoded to 44.1 kHz / 16-bit
-  - scripts\classical_folder_helper.py from the same skill package for mechanical cleanup
-  - PowerShell on Windows for running the workflow and file operations
+## Shared Dependencies
 
-  Conditional / workflow dependencies:
+Both skills rely on:
 
-  - Internet access for fetching replacement cover art when local art is missing or weak
-  - Existing FLAC tags and embedded artwork, since the skill is read-first and preserves source context
-  - A Windows Python launcher or a direct interpreter path if py -3.12 is unavailable
+- `Python 3.12`
+- `mutagen`
+- `metaflac`
+- `flac` or `flac.exe` for integrity testing with `-t`
+- `sox` when audio must be recoded to 44.1 kHz / 16-bit
+- Windows PowerShell for the normal workflow in this environment
+
+## `flac-folder-maintenance`
+
+In addition to the shared dependencies, this skill may also use:
+
+- `ffprobe` or `ffmpeg` for audio/container inspection when needed
+- Internet access for fetching cover art when local artwork is missing or weak
+- Existing FLAC tags and embedded artwork, since the workflow is read-first
+- Optional temporary helper files created during cleanup and verification
+
+## `classical-flac-folder-maintenance`
+
+In addition to the shared dependencies, this skill also expects:
+
+- `py -3.12`, or a direct Python 3.12 interpreter path if the launcher is unavailable
+- `scripts\classical_folder_helper.py` from the skill package
+- Internet access for cover art and release-title verification when local data is incomplete
+- Existing FLAC tags, sibling work folders, and release-level artwork as source context
+
+## Key Differences
+
+- `flac-folder-maintenance` allows `artist` and `albumartist` handling for non-classical release structures.
+- `classical-flac-folder-maintenance` depends on the helper script and a classical composer/work/performance folder model.
+- `flac-folder-maintenance` may use `ffprobe`/`ffmpeg`; the classical skill does not list them as part of its normal workflow.
+- `classical-flac-folder-maintenance` is more dependent on artwork reuse across sibling work folders and on consistent release clustering.
+
+## Notes
+
+- Neither skill declares a formal package manifest.
+- The dependency lists above are operational, based on the instructions in each `SKILL.md`.
